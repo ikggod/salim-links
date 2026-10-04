@@ -3,239 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>살림다이어리 | 살림템 모음</title>
+<title>살림다이어리 | 영상 속 살림템 번호로 찾기</title>
+<meta name="description" content="@salim.diary.k 릴스에 나온 살림템을 영상 번호로 찾아보세요.">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #fdf6f0;
-    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-    min-height: 100vh;
-    padding: 24px 16px 40px;
-  }
-  .header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-  .header .avatar {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: #f3c98b;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 10px;
-  }
-  .header h1 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333;
-  }
-  .header p {
-    font-size: 13px;
-    color: #888;
-    margin-top: 4px;
-  }
-  .notice {
-    background: #fff8e7;
-    border-left: 3px solid #f3c98b;
-    border-radius: 6px;
-    padding: 10px 14px;
-    font-size: 11px;
-    color: #888;
-    margin-bottom: 20px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 14px;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-  .card {
-    background: #fff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-    text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.15s;
-    display: flex;
-    flex-direction: column;
-  }
-  .card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
-  .card-icon {
-    background: #fef3e2;
-    text-align: center;
-    font-size: 44px;
-    padding: 22px 0 16px;
-  }
-  .card-body {
-    padding: 12px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .card-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  .card-sub {
-    font-size: 11px;
-    color: #aaa;
-    margin-bottom: 10px;
-  }
-  .card-btn {
-    display: block;
-    background: #ff5722;
-    color: #fff;
-    text-align: center;
-    border-radius: 8px;
-    padding: 7px 0;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .footer {
-    text-align: center;
-    margin-top: 36px;
-    font-size: 11px;
-    color: #bbb;
-    line-height: 1.8;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fdf6f0;font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#333;padding:22px 14px 40px}
+.wrap{max-width:480px;margin:0 auto}
+.head{text-align:center;margin-bottom:16px}
+.avatar{width:64px;height:64px;border-radius:50%;background:#f3c98b;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 8px}
+h1{font-size:18px}
+.head p{font-size:13px;color:#888;margin-top:4px}
+.how{background:#fff;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.how b{color:#ff5722}
+#q{width:100%;padding:12px 14px;border:2px solid #f3c98b;border-radius:12px;font-size:15px;margin-bottom:12px;background:#fff}
+h2{font-size:14px;color:#888;margin:18px 2px 8px}
+.item{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:12px;margin-bottom:10px;text-decoration:none;color:inherit;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.item:active{transform:scale(.98)}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:#ff5722;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.emo{font-size:24px}
+.txt{flex:1;display:flex;flex-direction:column;min-width:0}
+.txt b{font-size:15px}
+.txt small{font-size:12px;color:#999;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.go{flex:0 0 auto;background:#ff5722;color:#fff;font-size:12px;font-weight:700;padding:8px 10px;border-radius:10px}
+.basic .num{background:#f3c98b}
+.notice{font-size:11px;color:#999;text-align:center;line-height:1.6;margin-top:20px}
 </style>
 </head>
 <body>
-<div class="header">
-  <div class="avatar">🏡</div>
-  <h1>살림다이어리</h1>
-  <p>영상 속 살림템 최저가 모음</p>
+<div class="wrap">
+  <div class="head">
+    <div class="avatar">🏡</div>
+    <h1>살림다이어리</h1>
+    <p>영상 속 살림템, 번호로 찾기</p>
+  </div>
+  <div class="how">📌 릴스 캡션의 <b>번호</b>를 찾아 누르면 쿠팡 최저가로 연결돼요.<br>예) "프로필 링크 → <b>11번</b>"</div>
+  <input id="q" type="search" placeholder="🔍 번호나 제품 이름 검색 (예: 11, 압축봉)" oninput="f(this.value)">
+  <h2>🎬 영상 속 제품 (최신순)</h2>
+    <a class="item" href="https://link.coupang.com/a/gjCtZkT3Bc" target="_blank" rel="noopener sponsored" data-k="11 압축봉 (다용도) 압축봉 하나면 수납이 두 배">
+      <span class="num">11</span>
+      <span class="emo">🪄</span>
+      <span class="txt"><b>압축봉 (다용도)</b><small>🎬 압축봉 하나면 수납이 두 배</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCtfdjuN2" target="_blank" rel="noopener sponsored" data-k="10 싱크대 정리 선반·바구니 싱크대 밑 수납, 바구니 하나로 끝">
+      <span class="num">10</span>
+      <span class="emo">🧺</span>
+      <span class="txt"><b>싱크대 정리 선반·바구니</b><small>🎬 싱크대 밑 수납, 바구니 하나로 끝</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCsuQpJjE" target="_blank" rel="noopener sponsored" data-k="9 신발 세탁 전용 솔 흰 운동화 누렇게 안 변하는 세탁법">
+      <span class="num">9</span>
+      <span class="emo">🪥</span>
+      <span class="txt"><b>신발 세탁 전용 솔</b><small>🎬 흰 운동화 누렇게 안 변하는 세탁법</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCrKVreGi" target="_blank" rel="noopener sponsored" data-k="8 운동화 세탁망 운동화 냄새, 베이킹소다 한 컵이면 끝">
+      <span class="num">8</span>
+      <span class="emo">👟</span>
+      <span class="txt"><b>운동화 세탁망</b><small>🎬 운동화 냄새, 베이킹소다 한 컵이면 끝</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCq0wAFoq" target="_blank" rel="noopener sponsored" data-k="7 주방 슬림 휴지통 주방 휴지통 냄새, 신문지 한 장이면 끝">
+      <span class="num">7</span>
+      <span class="emo">🗑️</span>
+      <span class="txt"><b>주방 슬림 휴지통</b><small>🎬 주방 휴지통 냄새, 신문지 한 장이면 끝</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCqgD6mVU" target="_blank" rel="noopener sponsored" data-k="6 현관 우산 정리함 장마철 젖은 우산, 이렇게 정리하세요">
+      <span class="num">6</span>
+      <span class="emo">☔</span>
+      <span class="txt"><b>현관 우산 정리함</b><small>🎬 장마철 젖은 우산, 이렇게 정리하세요</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCpwwO7Pg" target="_blank" rel="noopener sponsored" data-k="5 압축봉 수납 선반 압축봉 두 개면 선반이 뚝딱">
+      <span class="num">5</span>
+      <span class="emo">🛠️</span>
+      <span class="txt"><b>압축봉 수납 선반</b><small>🎬 압축봉 두 개면 선반이 뚝딱</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjCoLNMEbQ" target="_blank" rel="noopener sponsored" data-k="4 욕실 청소용품 세트 화장실 물때, 이제 스트레스 안 받아요">
+      <span class="num">4</span>
+      <span class="emo">🚿</span>
+      <span class="txt"><b>욕실 청소용품 세트</b><small>🎬 화장실 물때, 이제 스트레스 안 받아요</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjv1UWK6Me" target="_blank" rel="noopener sponsored" data-k="3 쌀통 밀폐용기 밥솥 오래 쓰는 쌀 씻기 습관">
+      <span class="num">3</span>
+      <span class="emo">🍚</span>
+      <span class="txt"><b>쌀통 밀폐용기</b><small>🎬 밥솥 오래 쓰는 쌀 씻기 습관</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjv1m1MYCq" target="_blank" rel="noopener sponsored" data-k="2 세탁기 배수구 역류 차단 세탁실 배수구 냄새랑 물 역류, 이걸로 끝">
+      <span class="num">2</span>
+      <span class="emo">🌀</span>
+      <span class="txt"><b>세탁기 배수구 역류 차단</b><small>🎬 세탁실 배수구 냄새랑 물 역류, 이걸로 끝</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item" href="https://link.coupang.com/a/gjv0PdvAtw" target="_blank" rel="noopener sponsored" data-k="1 냉장고 정리함 냉장고 전기세 폭탄 맞기 전에 확인">
+      <span class="num">1</span>
+      <span class="emo">🧊</span>
+      <span class="txt"><b>냉장고 정리함</b><small>🎬 냉장고 전기세 폭탄 맞기 전에 확인</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+  <h2>🧺 주방 기본템</h2>
+    <a class="item basic" href="https://link.coupang.com/a/gjv202SD12" target="_blank" rel="noopener sponsored" data-k="극세사 행주 물자국 없이 깔끔">
+      <span class="num">★</span>
+      <span class="emo">🧽</span>
+      <span class="txt"><b>극세사 행주</b><small>물자국 없이 깔끔</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+    <a class="item basic" href="https://link.coupang.com/a/gjv2td3Mbs" target="_blank" rel="noopener sponsored" data-k="주방 수납 정리함 서랍·싱크대 정리">
+      <span class="num">★</span>
+      <span class="emo">🗄️</span>
+      <span class="txt"><b>주방 수납 정리함</b><small>서랍·싱크대 정리</small></span>
+      <span class="go">최저가 →</span>
+    </a>
+  <p class="notice">이 페이지는 쿠팡 파트너스 활동의 일환으로,<br>이에 따른 일정액의 수수료를 제공받습니다.<br>@salim.diary.k</p>
 </div>
-
-<div class="notice">
-  이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-</div>
-
-<div class="grid">
-
-  <a class="card" href="https://link.coupang.com/a/gjv0PdvAtw" target="_blank" rel="noopener">
-    <div class="card-icon">🧊</div>
-    <div class="card-body">
-      <div class="card-label">냉장고 정리함</div>
-      <div class="card-sub">야채칸·냉동실 정리</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-
-  <a class="card" href="https://link.coupang.com/a/gjv1m1MYCq" target="_blank" rel="noopener">
-    <div class="card-icon">🌀</div>
-    <div class="card-body">
-      <div class="card-label">세탁기 배수구 차단</div>
-      <div class="card-sub">냄새·역류 한번에 해결</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-
-  <a class="card" href="https://link.coupang.com/a/gjv1UWK6Me" target="_blank" rel="noopener">
-    <div class="card-icon">🌾</div>
-    <div class="card-body">
-      <div class="card-label">쌀통 밀폐용기</div>
-      <div class="card-sub">쌀벌레 걱정 끝</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-
-  <a class="card" href="https://link.coupang.com/a/gjv2td3Mbs" target="_blank" rel="noopener">
-    <div class="card-icon">🗄️</div>
-    <div class="card-body">
-      <div class="card-label">주방 수납 정리함</div>
-      <div class="card-sub">싱크대·서랍 깔끔하게</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-
-  <a class="card" href="https://link.coupang.com/a/gjv202SD12" target="_blank" rel="noopener">
-    <div class="card-icon">🧹</div>
-    <div class="card-body">
-      <div class="card-label">극세사 행주</div>
-      <div class="card-sub">물자국 없이 깔끔</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-
-  <a class="card" href="https://link.coupang.com/a/gjCoLNMEbQ" target="_blank" rel="noopener">
-    <div class="card-icon">🚿</div>
-    <div class="card-body">
-      <div class="card-label">욕실 청소용품 세트</div>
-      <div class="card-sub">화장실 청소 한번에</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCpwwO7Pg" target="_blank" rel="noopener">
-    <div class="card-icon">🗄️</div>
-    <div class="card-body">
-      <div class="card-label">압축봉 수납 선반</div>
-      <div class="card-sub">압축봉으로 선반 만들기</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCqgD6mVU" target="_blank" rel="noopener">
-    <div class="card-icon">☔</div>
-    <div class="card-body">
-      <div class="card-label">우산 정리함 현관</div>
-      <div class="card-sub">현관 우산 정리</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCq0wAFoq" target="_blank" rel="noopener">
-    <div class="card-icon">🗑️</div>
-    <div class="card-body">
-      <div class="card-label">주방 휴지통 슬림</div>
-      <div class="card-sub">싱크대 아래 딱 맞는</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCrKVreGi" target="_blank" rel="noopener">
-    <div class="card-icon">👟</div>
-    <div class="card-body">
-      <div class="card-label">신발 세탁망 운동화</div>
-      <div class="card-sub">운동화 세탁 간편하게</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCsuQpJjE" target="_blank" rel="noopener">
-    <div class="card-icon">🪥</div>
-    <div class="card-body">
-      <div class="card-label">신발 세탁 전용 솔</div>
-      <div class="card-sub">신발 흰 부분 깨끗하게</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCtfdjuN2" target="_blank" rel="noopener">
-    <div class="card-icon">🍽️</div>
-    <div class="card-body">
-      <div class="card-label">싱크대 정리함 선반</div>
-      <div class="card-sub">싱크대 수납 깔끔하게</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-  <a class="card" href="https://link.coupang.com/a/gjCtZkT3Bc" target="_blank" rel="noopener">
-    <div class="card-icon">📦</div>
-    <div class="card-body">
-      <div class="card-label">압축봉 다용도 활용</div>
-      <div class="card-sub">압축봉 하나로 수납 해결</div>
-      <span class="card-btn">최저가 보기 →</span>
-    </div>
-  </a>
-</div>
-
-<div class="footer">
-  @salim.diary.k<br>
-  쿠팡 파트너스 활동으로 수수료를 제공받습니다.
-</div>
+<script>
+function f(v){v=v.trim().toLowerCase();document.querySelectorAll('.item').forEach(function(a){a.style.display=!v||a.dataset.k.toLowerCase().indexOf(v)>-1?'flex':'none'})}
+</script>
 </body>
 </html>
